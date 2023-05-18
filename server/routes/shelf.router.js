@@ -21,7 +21,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  // endpoint functionality
+  console.log(req.body);
+
 });
 
 /**

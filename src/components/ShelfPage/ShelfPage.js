@@ -29,14 +29,14 @@ function ShelfPage() {
         <ul>
           {things.map(thing => {
             return (
-              <>
-                <li key={thing.id}>
+              <span key={thing.id}>
+                <li>
                   {
                     thing.description
                   }
                 </li>
-                <img src={thing.image_url}/>
-              </>
+                <img src={thing.image_url} />
+              </span>
             )
           })}
         </ul>
