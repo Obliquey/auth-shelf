@@ -11,6 +11,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   pool.query(`SELECT * FROM "item";`)
     .then(dbRes => {
       console.log("Got our items?", dbRes.rows);
+      res.send(dbRes.rows);
     }).catch(dbErr => {
       console.log("Error connecting to DB:", dbErr);
     })
