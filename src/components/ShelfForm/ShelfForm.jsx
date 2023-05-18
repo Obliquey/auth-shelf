@@ -14,6 +14,9 @@ function ShelfForm () {
             type: 'SAGA/ADD_THINGS',
             payload: {name: thingInput, image: imgInput}
         })
+        dispatch({
+            type: 'SAGA/FETCH_THINGS'
+          })
     };
     
     return (

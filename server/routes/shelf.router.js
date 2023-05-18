@@ -10,32 +10,46 @@ const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 router.get('/', rejectUnauthenticated, (req, res) => {
   pool.query(`SELECT * FROM "item";`)
     .then(dbRes => {
-      console.log("Got our items?", dbRes.rows);
       res.send(dbRes.rows);
     }).catch(dbErr => {
-      console.log("Error connecting to DB:", dbErr);
+      console.log("Error connecting/Getting to DB:", dbErr);
     })
 });
 
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
-  console.log(req.body);
-
+router.post('/', rejectUnauthenticated, (req, res) => {
+  const thingName = req.body.name
+  const imgURL = req.body.image
+  const userId = req.user.id
+  // console.log(req.body);
+  // need to extract req.body information ===> it's the item we want to add to the DB
+  // need to make a SQL query to INSERT that item INTO the "item" table
+  const sqlValues = [thingName, imgURL, userId]
+  const sqlQuery = `INSERT INTO item (description, image_url, user_id)
+    VALUES ($1, $2, $3);
+  `
+  pool.query(sqlQuery, sqlValues)
+    .then(dbRes => {
+      console.log("Successfully created item!", dbRes);
+      res.sendStatus(201)
+    }).catch(dbErr => {
+      console.log("Error connecting/Posting to DB:", dbErr);
+    })
 });
 
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 });
 
 /**
  * Update an item if it's something the logged in user added
  */
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 });
 
