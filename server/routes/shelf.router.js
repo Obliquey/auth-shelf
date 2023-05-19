@@ -44,6 +44,15 @@ router.post('/', rejectUnauthenticated, (req, res) => {
  */
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
+  const idToDelete = req.params.id;
+  const sqlQuery = `DELETE FROM item WHERE id = $1;`
+  pool.query(sqlQuery, [idToDelete])
+    .then(dbRes => {
+      console.log('Item got deleted at id', idToDelete);
+      res.sendStatus(200)
+    }).catch(dbErr => {
+      console.log("Error connecting/Posting to DB:", dbErr);
+    })
 });
 
 /**

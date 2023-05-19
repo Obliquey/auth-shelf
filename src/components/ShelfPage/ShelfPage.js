@@ -21,6 +21,13 @@ function ShelfPage() {
     })
   }
 
+  const deleteItem = (id) => {
+    dispatch({
+      type: 'SAGA/DELETE_THINGS',
+      payload: id
+    })
+  }
+
   return (
     <div className="container">
       <h2>Shelf</h2>
@@ -36,6 +43,7 @@ function ShelfPage() {
                   }
                 </li>
                 <img src={thing.image_url} />
+                <button onClick={() => deleteItem(thing.id)}>❌</button>
               </span>
             )
           })}

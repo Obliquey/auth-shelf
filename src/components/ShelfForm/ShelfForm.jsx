@@ -14,6 +14,8 @@ function ShelfForm () {
             type: 'SAGA/ADD_THINGS',
             payload: {name: thingInput, image: imgInput}
         })
+        setImgInput('')
+        setThingInput('')
     }
     
     return (
