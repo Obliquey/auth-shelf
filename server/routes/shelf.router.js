@@ -76,6 +76,14 @@ router.get('/count', (req, res) => {
 router.get('/:id', (req, res) => {
   // endpoint functionality
   console.log("In server GET, here's the ID of the item we want to edit:", req.params.id);
+  pool.query(`SELECT * FROM "item" WHERE id = $1;`, [req.params.id])
+  .then(dbRes => {
+    console.log("Here's the item info:", dbRes.rows);
+    res.send(dbRes.rows);
+  }).catch(dbErr => {
+    console.log("Error connecting/Getting to DB:", dbErr);
+  })
+  
 });
 
 module.exports = router;
