@@ -75,6 +75,7 @@ router.get('/count', (req, res) => {
  */
 router.get('/:id', (req, res) => {
   // endpoint functionality
+  console.log("In server GET, here's the ID of the item we want to edit:", req.params.id);
 });
 
 module.exports = router;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import ShelfForm from '../ShelfForm/ShelfForm'
+import { useHistory } from 'react-router-dom';
 
 function ShelfPage() {
   const dispatch = useDispatch();
@@ -28,6 +29,13 @@ function ShelfPage() {
     })
   }
 
+  const editItem = (id) => {
+    dispatch({
+      type: 'SAGA/EDIT_THINGS',
+      payload: id
+    })
+  }
+
   return (
     <div className="container">
       <h2>Shelf</h2>
@@ -44,6 +52,7 @@ function ShelfPage() {
                 </li>
                 <img src={thing.image_url} />
                 <button onClick={() => deleteItem(thing.id)}>❌</button>
+                <button onClick={() => editItem(thing.id)}>Edit</button>
               </span>
             )
           })}

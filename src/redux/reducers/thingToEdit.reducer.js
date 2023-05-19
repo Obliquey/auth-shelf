@@ -1,9 +1,9 @@
-const things = (state=[], action) =>{
+const thingToEdit = (state=[], action) =>{
     switch (action.type){
-        case 'SET_THINGS':
+        case 'THING_TO_EDIT':
             return action.payload;
         default:
             return state
     }
 };
-export default things;
+export default thingToEdit;
